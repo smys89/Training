@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.2",
+    "contentVersion": "1.0.0.1",
     "parameters": {
         "virtualMachines_backendSERVER_name": {
             "defaultValue": "backendSERVER",
@@ -253,60 +253,6 @@
                 }
             }
         },
-		{
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2019-03-01",
-            "name": "[parameters('virtualMachines_backendSERVER2_name')]",
-            "location": "uksouth",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_backendserver890_name'))]"
-            ],
-            "tags": {
-                "BeardSite": "uksouth"
-            },
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "Standard_B1s"
-                },
-                "storageProfile": {
-                    "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "2016-Datacenter",
-                        "version": "latest"
-                    },
-                    "osDisk": {
-                        "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_backendSERVER2_name'), '_OsDisk_1_ef3ab3c577ea4dd5827852baae056008')]",
-                        "createOption": "FromImage",
-                        "caching": "ReadWrite",
-                        "managedDisk": {
-                            "storageAccountType": "Standard_LRS"
-                        },
-                        "diskSizeGB": 127
-                    },
-                    "dataDisks": []
-                },
-                "osProfile": {
-                    "computerName": "[parameters('virtualMachines_backendSERVER2_name')]",
-                    "adminUsername": "beardmin",
-                    "adminPassword": "mM%Vc!562yTj",
-                    "windowsConfiguration": {
-                        "provisionVMAgent": true,
-                        "enableAutomaticUpdates": true
-                    },
-                    "secrets": [],
-                    "allowExtensionOperations": true
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_backendserver890_name'))]"
-                        }
-                    ]
-                }
-            }
-        },
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-03-01",
@@ -412,7 +358,7 @@
                 }
             }
         },
-		{
+        {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-07-01",
             "name": "[parameters('networkInterfaces_backendserver890_name')]",
@@ -445,7 +391,7 @@
                 "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_backendSERVER2_nsg_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_backendSERVER_nsg_name'))]"
                 }
             }
         },
